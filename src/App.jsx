@@ -1,9 +1,15 @@
-function App() {
+import { Home } from './templates/Home/index'
+
+import React from 'react'
+
+const App = () => {
   return (
-    <div className='App'>
-      <h1>Orange Evolution</h1>
-    </div>
-  );
+    <>
+    <Home/>
+    </>
+  )
 }
 
-export default App;
+export default App
+
+
