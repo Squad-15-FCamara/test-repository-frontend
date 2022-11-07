@@ -7,9 +7,9 @@ import {provisionalData} from '../../data/provisionalData'
 import api from '../../services/api'
 
 export const Login = ()=>{
-    // const [courses, setData] = useState(data)
+
     const [isLoading, setIsLoading] = useState(true)
-    const [cursos, setCursos] = useState([])
+    const [inputs, setInputs] = useState({isAdmin: false})
 
     useEffect(()=>{
 
@@ -17,7 +17,10 @@ export const Login = ()=>{
       setIsLoading(false)
       console.log(ArrayCursos)
 
+
+
     },[])
+
     let ArrayCursos = [];
 
     const PostData = async (provisionalData) => {
@@ -29,7 +32,13 @@ export const Login = ()=>{
          return ArrayCursos
       }))
 
+    }
 
+    const CreateUser = async (inputs) =>{
+      await api
+        .post('/users', inputs)
+        .then(response => console.log(response))
+        .catch(e => console.log(e))
     }
 
 
@@ -42,13 +51,35 @@ export const Login = ()=>{
     }
 
 
+    const handleSubmit = (e) =>{
+        e.preventDefault()
+        console.log(inputs)
+
+        CreateUser(inputs)
+        setInputs( {[inputs.name] : [inputs.value]})
+    }
+
+
+
+
+    const updateInput = (e) =>{
+      const name = e.target.name;
+      const value = e.target.value;
+      setInputs( {...inputs,
+        [name]: value
+      })
+
+    }
+
 
     return (
       <Wrapper>
-        <Form>
-          <Input placeholder='nome'/>
-          <Input placeholder='e-mail'/>
-          <Button> ACESSAR TRILHAS </Button>
+        <Form onSubmit={handleSubmit}>
+          <Input type='text' placeholder='nome' name='name' value={inputs.name || ''} onChange={updateInput}/>
+          <Input type='text' placeholder='e-mail' name='email' value={inputs.email || ''} onChange={updateInput}/>
+          <Input type='text' placeholder='profissão' name='actualJob' value={inputs.actualJob || ''} onChange={updateInput}/>
+
+          <Button type='submit'> ACESSAR TRILHAS </Button>
         </Form>
 
       </Wrapper>
