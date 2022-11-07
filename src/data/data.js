@@ -124,18 +124,5 @@ export const data = {
             "link":"https://www.udemy.com/course/git-e-github-para-iniciantes/",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vulputate purus ut tincidunt posuere. In quis justo quam."
               }
-
-
-
-
-
-
-
-
-  ]
-
-
-
-
-
+           ]
 }
